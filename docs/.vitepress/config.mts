@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 import { mdPlugin } from './config/plugin'
 import { mergePath } from './utils'
 export default defineConfig({
-  title: "Vant4-Kit",
+  title: "@yucheng2/vant4-kit",
   description: "让开发更简单",
   head: [
     ['link', { rel: 'icon', href: 'logo.png' }],
@@ -24,7 +24,7 @@ export default defineConfig({
           { text: 'Vant Aliapp (支付宝小程序)', link: 'https://ant-move.github.io/vant-ailapp-docs/#/intro' },
         ]
       },
-      { text: "🤖提Issue", link: 'https://github.com/mitjs/element-plus-kit/issues' },
+      { text: "🤖提Issue", link: 'https://github.com/yucheng2/element-plus-kit/issues' },
       { text: '🔗ElementPlus Kit', link: 'https://element-plus-kit.netlify.app/' },
     ],
 
@@ -61,7 +61,7 @@ export default defineConfig({
         },
         link: 'https://vant.pro/vant/#/zh-CN/home'
       },
-      { icon: 'github', link: 'https://github.com/mitjs/vant4-kit' },
+      { icon: 'github', link: 'https://github.com/yucheng2/vant4-kit' },
     ],
 
     search: {

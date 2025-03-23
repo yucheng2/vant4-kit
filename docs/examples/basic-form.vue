@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Button } from 'vant'
-import type { XFormItemOption } from 'vant4-kit';
+import type { XFormItemOption } from '@yucheng2/vant4-kit';
 const formValue = ref({
   text: '我是一段自定义文本',
   html: '<h4>我是一个带h4标签的html片段</h4>'

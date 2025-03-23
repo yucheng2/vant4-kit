@@ -23,7 +23,7 @@ export default defineConfig({
         outDir: 'dist/es',
         lib: {
             entry: resolve(__dirname, './index.ts'),
-            name: 'vant4-kit',
+            name: '@yucheng2/vant4-kit',
             fileName: 'index',
             formats: ['es'],
         },

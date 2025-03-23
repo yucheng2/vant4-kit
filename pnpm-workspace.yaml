@@ -1,5 +1,7 @@
 packages:
-  - "packages/*"
-  - "docs"
-  - "play"
-  - "iframe-web"
+  - packages/*
+  - docs
+  - play
+  - iframe-web
+ignoredBuiltDependencies:
+  - esbuild

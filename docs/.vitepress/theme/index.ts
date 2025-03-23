@@ -6,7 +6,7 @@ import 'vant/lib/index.css';
 import './styles/var.css'
 // import 'prismjs/themes/prism.css'
 // import 'prismjs/components/prism-javascript';
-import Vant4Kit from 'vant4-kit'
+import Vant4Kit from '@yucheng2/vant4-kit'
 import useVisitData from '../hooks/useVisitData';
 import type { Plugin } from 'vue';
 

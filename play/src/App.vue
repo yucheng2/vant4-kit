@@ -34,7 +34,7 @@
 <script setup lang="ts">
 import { ref, watch, h } from 'vue'
 import { Button, type FormInstance } from 'vant'
-import type { XFormItemOption, XFormItemRow } from 'vant4-kit'
+import type { XFormItemOption, XFormItemRow } from '@yucheng2/vant4-kit'
 const formRef = ref<FormInstance>()
 const formRef1 = ref<FormInstance>()
 const formValue = ref<any>({ text: 'text 文本', html: '<h3>我是html</h3> ' })

@@ -8,7 +8,7 @@ export default defineConfig({
         outDir: 'dist/umd',
         lib: {
             entry: resolve(__dirname, './index.ts'),
-            name: 'vant4-kit',
+            name: '@yucheng2/vant4-kit',
             fileName: 'index',
             formats: ['umd'],
         },

@@ -10,7 +10,7 @@
   <script lang="ts" setup>
   import type {FormInstance,FieldRule} from 'vant'
   import  { Button,showFailToast } from 'vant'
-  import type { XFormItemOption } from 'vant4-kit';
+  import type { XFormItemOption } from '@yucheng2/vant4-kit';
   import { ref, h } from 'vue'
   
   const formRef=ref<FormInstance>()

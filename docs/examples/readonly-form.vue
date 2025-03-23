@@ -5,7 +5,7 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import type { XFormItemOption } from 'vant4-kit';
+import type { XFormItemOption } from '@yucheng2/vant4-kit';
 const formValue = ref({
     name: '苏苏',
     tel: '123456789',

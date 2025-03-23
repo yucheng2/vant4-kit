@@ -1,4 +1,4 @@
-# vant4-kit
+# @yucheng2/vant4-kit
 
 ## 1.0.2
 

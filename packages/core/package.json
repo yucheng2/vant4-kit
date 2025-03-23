@@ -1,5 +1,5 @@
 {
-  "name": "vant4-kit",
+  "name": "@yucheng2/vant4-kit",
   "version": "1.0.2",
   "description": "一款基于 Vant4.x 的增强组件库",
   "type": "module",
@@ -13,11 +13,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mitjs/vant4-kit.git"
+    "url": "git+https://github.com/yucheng2/vant4-kit.git"
   },
   "homepage": "https://vant4-kit.netlify.app/",
   "bugs": {
-    "url": "https://github.com/mitjs/vant4-kit/issues"
+    "url": "https://github.com/yucheng2/vant4-kit/issues"
   },
   "exports": {
     ".": {
@@ -45,7 +45,7 @@
   "keywords": [
     "vant",
     "vant4",
-    "vant4-kit",
+    "@yucheng2/vant4-kit",
     "components",
     "vue"
   ],

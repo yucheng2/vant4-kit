@@ -4,7 +4,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { XFormItemOption } from 'vant4-kit';
+import type { XFormItemOption } from '@yucheng2/vant4-kit';
 import { ref, h } from 'vue'
 import { Icon, Button } from 'vant';
 

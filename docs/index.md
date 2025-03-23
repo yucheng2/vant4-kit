@@ -2,22 +2,22 @@
 layout: home
 
 hero:
-  name: Vant4 Kit 
+  name: Vant4 Kit
   text: 加速开发，早点下班
-  tagline: 🌈 简单，提效，易用 
+  tagline: 🌈 简单，提效，易用
   image:
     src: ./logo.png
-    alt: Vant4 Kit 
+    alt: Vant4 Kit
   actions:
     - theme: brand
-      text: 🔎 什么是 Vant4-Kit❔
+      text: 🔎 什么是 @yucheng2/vant4-kit❔
       link: /md/guide/
     - theme: alt
       text: 快速开始
       link: /md/guide/quick-start
     - theme: alt
       text: 🌟 Star 一下
-      link: https://github.com/mitjs/vant4-kit.git
+      link: https://github.com/yucheng2/vant4-kit.git
 
 features:
   - icon: 🧊
@@ -30,7 +30,9 @@ features:
     icon: ✨
     details: 与Vant官方文档保持高度一致，降低学习成本
 ---
+
 ---
+
 <script setup>
 import Pay from './components/pay.vue'
 import DataPanel from './components/DataPanel.vue'
@@ -38,7 +40,6 @@ import DataPanel from './components/DataPanel.vue'
 
 <DataPanel/>
 <Pay/>
-
 
 <style>
 :root {
