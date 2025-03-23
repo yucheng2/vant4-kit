@@ -1,6 +1,6 @@
 {
   "name": "@yucheng2/vant4-kit",
-  "version": "1.0.2",
+  "version": "0.0.1",
   "description": "一款基于 Vant4.x 的增强组件库",
   "type": "module",
   "main": "./dist/umd/index.umd.cjs",
@@ -13,11 +13,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yucheng2/vant4-kit.git"
+    "url": "git+https://github.com/mitjs/vant4-kit.git"
   },
   "homepage": "https://vant4-kit.netlify.app/",
   "bugs": {
-    "url": "https://github.com/yucheng2/vant4-kit/issues"
+    "url": "https://github.com/mitjs/vant4-kit/issues"
   },
   "exports": {
     ".": {
