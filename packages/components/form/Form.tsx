@@ -36,6 +36,8 @@ export default defineComponent({
     props: xformProps,
     emits: ['submit', 'failed', 'confirm', 'cancel', 'change', 'blur', 'focus', 'click', 'drag-start', 'drag-end', 'plus', 'minus', 'overlimit', 'finish', 'click-tab'],
     setup(props, { slots, attrs, emit, expose }) {
+        console.log(attrs);
+        
         const formRef = ref()
         const onSubmit = (...args: any) => emit("submit", ...args)
         const onFailed = (...args: any) => emit("failed", ...args)

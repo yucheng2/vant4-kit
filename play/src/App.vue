@@ -34,7 +34,8 @@
 <script setup lang="ts">
 import { ref, watch, h } from 'vue'
 import { Button, type FormInstance } from 'vant'
-import type { XFormItemOption, XFormItemRow } from '@yucheng2/vant4-kit'
+import type { XFormItemOption, XFormItemRow } from '@vant4-kit/components'
+import { XForm } from '@vant4-kit/components'
 const formRef = ref<FormInstance>()
 const formRef1 = ref<FormInstance>()
 const formValue = ref<any>({ text: 'text 文本', html: '<h3>我是html</h3> ' })
@@ -45,7 +46,7 @@ const formOptions = ref<XFormItemOption>([
     name: 'name',
     required: true,
     vif: (values: any) => {
-      console.log('vif values =', values);
+      // console.log('vif values =', values);
       return true
     }
   },
@@ -240,20 +241,20 @@ const formOptions = ref<XFormItemOption>([
   //   attrs: {
   //   }
   // },
-  {
-    type: 'datetime-picker',
-    label: '日期时间选择',
-    name: 'datetimePicker',
-    attrs: {
-      showType: 'single',
-      groupProps: {
-        'columns-type': ['hour', 'minute']
-      }
-      // groupProps: [
-      //   { label: '开始时间', prop: 'startTime' },
-      // ]
-    }
-  },
+  // {
+  //   type: 'datetime-picker',
+  //   label: '日期时间选择',
+  //   name: 'datetimePicker',
+  //   attrs: {
+  //     showType: 'single',
+  //     groupProps: {
+  //       'columns-type': ['hour', 'minute']
+  //     }
+  //     // groupProps: [
+  //     //   { label: '开始时间', prop: 'startTime' },
+  //     // ]
+  //   }
+  // },
   {
     type: 'datetime-picker',
     label: '日期时间选择',
@@ -262,10 +263,14 @@ const formOptions = ref<XFormItemOption>([
       showType: 'group',
       groupProps: {
         'columns-type': ['hour', 'minute']
-      }
+      },
       // groupProps: [
       //   { label: '开始时间', prop: 'startTime' },
       // ]
+    },
+    itemProps: {
+      minDate: new Date(2020, 0, 1),
+      maxDate: new Date(2025, 5, 1),
     }
   },
   // {
