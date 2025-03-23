@@ -57,5 +57,8 @@
   },
   "peerDependencies": {
     "vue": "^3.4.19"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
