@@ -10,5 +10,8 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.1"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.13"
   }
 }

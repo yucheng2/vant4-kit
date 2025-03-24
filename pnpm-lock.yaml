@@ -133,6 +133,10 @@ importers:
   packages/vant4-kit: {}
 
   play:
+    dependencies:
+      dayjs:
+        specifier: ^1.11.13
+        version: 1.11.13
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: ^5.2.1

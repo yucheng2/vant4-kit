@@ -55,7 +55,6 @@ export default defineComponent({
     },
     setup(props, { }) {
         const { type, formValue, label, name, required, readonly, options, itemAttrs, orgAttrs, config, popup } = props
-
         const { formSlots, rules, onEvents } = inject('x-form') as FormProvideProps
         const showPopup = ref(false)
 
@@ -155,10 +154,13 @@ export default defineComponent({
                     onClickRightIcon: () => {
                         if (readonly) return;
                         showPopup.value = true;
+                    },
+                    onClick:()=>{
+                        if (readonly) return;
+                        showPopup.value = true;
                     }
                 })
             }
-
             return Object.assign(FieldAttrs, row)
         }
         const onCancel = () => {
@@ -371,7 +373,6 @@ export default defineComponent({
                             />;
                     }
                 }
-
                 return <>
                     <Field v-model={formValue[`${name}Text`]} {...getBasicConfig()} v-slots={handlerSlot()} />
                     {/* 日期时间选择器Popup */}

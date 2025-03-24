@@ -36,56 +36,64 @@ import { ref, watch, h } from 'vue'
 import { Button, type FormInstance } from 'vant'
 import type { XFormItemOption, XFormItemRow } from '@vant4-kit/components'
 import { XForm } from '@vant4-kit/components'
+import dayjs from 'dayjs'
+
 const formRef = ref<FormInstance>()
 const formRef1 = ref<FormInstance>()
-const formValue = ref<any>({ text: 'text 文本', html: '<h3>我是html</h3> ' })
+const formValue = ref<any>({
+  text: 'text 文本', html: '<h3>我是html</h3> ',
+})
+// 时间范围需在30日之内；
+function getMinDate() {
+  return dayjs().subtract(30, 'day').toDate();
+}
 const formOptions = ref<XFormItemOption>([
-  {
-    label: 'Input 输入框',
-    type: 'input',
-    name: 'name',
-    required: true,
-    vif: (values: any) => {
-      // console.log('vif values =', values);
-      return true
-    }
-  },
-  {
-    label: '手机号',
-    type: 'input',
-    name: 'tel',
+  // {
+  //   label: 'Input 输入框',
+  //   type: 'input',
+  //   name: 'name',
+  //   required: true,
+  //   vif: (values: any) => {
+  //     // console.log('vif values =', values);
+  //     return true
+  //   }
+  // },
+  // {
+  //   label: '手机号',
+  //   type: 'input',
+  //   name: 'tel',
 
-    rules: [
-      { pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号', trigger: ['onChange', 'onBlur'] },
-    ],
-    itemProps: {
-      required: true,
-    }
-  },
-  {
-    label: 'Input 数字',
-    type: 'input',
-    name: 'number',
-    itemProps: {
-      type: 'number',
-    }
-  },
-  {
-    label: 'Input 整数',
-    type: 'input',
-    name: 'digit',
-    itemProps: {
-      type: 'digit',
-    }
-  },
-  {
-    label: 'Input 密码',
-    type: 'input',
-    name: 'password',
-    itemProps: {
-      type: 'password',
-    }
-  },
+  //   rules: [
+  //     { pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号', trigger: ['onChange', 'onBlur'] },
+  //   ],
+  //   itemProps: {
+  //     required: true,
+  //   }
+  // },
+  // {
+  //   label: 'Input 数字',
+  //   type: 'input',
+  //   name: 'number',
+  //   itemProps: {
+  //     type: 'number',
+  //   }
+  // },
+  // {
+  //   label: 'Input 整数',
+  //   type: 'input',
+  //   name: 'digit',
+  //   itemProps: {
+  //     type: 'digit',
+  //   }
+  // },
+  // {
+  //   label: 'Input 密码',
+  //   type: 'input',
+  //   name: 'password',
+  //   itemProps: {
+  //     type: 'password',
+  //   }
+  // },
   // {
   //   label: 'Input 文本域',
   //   type: 'input',
@@ -261,16 +269,15 @@ const formOptions = ref<XFormItemOption>([
     name: 'datetimePicker2',
     attrs: {
       showType: 'group',
-      groupProps: {
-        'columns-type': ['hour', 'minute']
-      },
-      // groupProps: [
-      //   { label: '开始时间', prop: 'startTime' },
-      // ]
-    },
-    itemProps: {
-      minDate: new Date(2020, 0, 1),
-      maxDate: new Date(2025, 5, 1),
+      groupProps: [
+        {
+          'columns-type': ['year', 'month', 'day'],
+          minDate: getMinDate(),
+          maxDate: new Date(),
+        },
+        { 'columns-type': ['hour', 'minute', 'second'] }
+      ],
+
     }
   },
   // {
@@ -313,29 +320,31 @@ const formOptions = ref<XFormItemOption>([
   //     useVantAreaData: true
   //   }
   // },
-  {
-    type: 'text',
-    label: '文本',
-    name: 'text',
-  },
-  {
-    type: 'html',
-    label: 'html片段',
-    name: 'html',
-    hiddenLabel: false
-  },
-  {
-    type: 'input-slot',
-    label: '插槽',
-    name: 'customSlot1',
-  },
-  {
-    type: 'slot',
-    label: '插槽',
-    name: 'customSlot',
-  },
+  // {
+  //   type: 'text',
+  //   label: '文本',
+  //   name: 'text',
+  // },
+  // {
+  //   type: 'html',
+  //   label: 'html片段',
+  //   name: 'html',
+  //   hiddenLabel: false
+  // },
+  // {
+  //   type: 'input-slot',
+  //   label: '插槽',
+  //   name: 'customSlot1',
+  // },
+  // {
+  //   type: 'slot',
+  //   label: '插槽',
+  //   name: 'customSlot',
+  // },
 ])
-
+const handleClick = (valeu) => {
+  console.log('handleClick', valeu);
+}
 const rules = {
   name: [
     { required: true, message: '请输入姓名', trigger: 'onChange' },

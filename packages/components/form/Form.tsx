@@ -36,8 +36,6 @@ export default defineComponent({
     props: xformProps,
     emits: ['submit', 'failed', 'confirm', 'cancel', 'change', 'blur', 'focus', 'click', 'drag-start', 'drag-end', 'plus', 'minus', 'overlimit', 'finish', 'click-tab'],
     setup(props, { slots, attrs, emit, expose }) {
-        console.log(attrs);
-        
         const formRef = ref()
         const onSubmit = (...args: any) => emit("submit", ...args)
         const onFailed = (...args: any) => emit("failed", ...args)
@@ -87,7 +85,6 @@ export default defineComponent({
             <CellGroup inset={inset}>
                 {items.map((item: XFormItemRow, index: number) => {
                     const { vif, type, name, label, itemProps, popup } = item;
-
                     if (!AllCompMap.includes(type)) {
                         throw new Error(`${type} 类型组件暂不支持`)
                         return null

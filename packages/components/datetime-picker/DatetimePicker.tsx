@@ -43,7 +43,6 @@ export default defineComponent({
             }
         })
         const pickerRef = ref<PickerInstance>();
-
         const genYearOptions = () => {
             const minYear = props.minYear as number;
             const maxYear = props.maxYear as number;
