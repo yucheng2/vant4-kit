@@ -2,8 +2,9 @@
   <div class="container">
     <x-form ref="formRef" label-align="top" :model="formValue" :items="formOptions" :rules="rules" inset
       @failed="onFailed" @change="onXFormChange" @confirm="onXFormConfirm">
-      <template #customSlot>
-        <h1>2222</h1>
+      <template #customSlot="item">
+        {{ item }}
+        <SlotTest></SlotTest>
       </template>
       <template #customSlot1>
         <h2>333</h2>
@@ -14,8 +15,11 @@
       console.log(args);
 
     }"></van-date-picker> -->
-    <div>
+    <div style="margin-top: 20px;">
       <Button block type="primary" @click="onSubmit">提交</Button>
+      <Button block type="primary" @click="onClear">清空</Button>
+      <Button block type="primary" @click="onChangeColumns">更改columns</Button>
+      <Button block type="primary" @click="onChangeFormValue">更改formValue</Button>
     </div>
 
     <!-- <van-form ref="formRef1">
@@ -37,6 +41,7 @@ import { Button, type FormInstance } from 'vant'
 import type { XFormItemOption, XFormItemRow } from '@vant4-kit/components'
 import { XForm } from '@vant4-kit/components'
 import dayjs from 'dayjs'
+import SlotTest from "./components/SlotTest.vue";
 
 const formRef = ref<FormInstance>()
 const formRef1 = ref<FormInstance>()
@@ -48,21 +53,20 @@ function getMinDate() {
   return dayjs().subtract(30, 'day').toDate();
 }
 const formOptions = ref<XFormItemOption>([
-  // {
-  //   label: 'Input 输入框',
-  //   type: 'input',
-  //   name: 'name',
-  //   required: true,
-  //   vif: (values: any) => {
-  //     // console.log('vif values =', values);
-  //     return true
-  //   }
-  // },
+  {
+    label: 'Input 输入框',
+    type: 'input',
+    name: 'name',
+    required: true,
+    vif: (values: any) => {
+      // console.log('vif values =', values);
+      return true
+    }
+  },
   // {
   //   label: '手机号',
   //   type: 'input',
   //   name: 'tel',
-
   //   rules: [
   //     { pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号', trigger: ['onChange', 'onBlur'] },
   //   ],
@@ -107,6 +111,16 @@ const formOptions = ref<XFormItemOption>([
   //     slots: {
   //       label: () => 2222
   //     }
+  //   }
+  // },
+  // {
+  //   label: 'Input 文本域',
+  //   type: 'input',
+  //   name: 'textarea',
+  //   itemProps: {
+  //     type: 'textarea',
+  //     autosize: true,
+  //     'show-word-limit': true,
   //   }
   // },
   // {
@@ -263,23 +277,26 @@ const formOptions = ref<XFormItemOption>([
   //     // ]
   //   }
   // },
-  {
-    type: 'datetime-picker',
-    label: '日期时间选择',
-    name: 'datetimePicker2',
-    attrs: {
-      showType: 'group',
-      groupProps: [
-        {
-          'columns-type': ['year', 'month', 'day'],
-          minDate: getMinDate(),
-          maxDate: new Date(),
-        },
-        { 'columns-type': ['hour', 'minute', 'second'] }
-      ],
+  // {
+  //   type: 'datetime-picker',
+  //   label: '日期时间选择',
+  //   name: 'datetimePicker2',
+  //   itemProps: {
+  //     disabled: true,
+  //   },
+  //   attrs: {
+  //     showType: 'group',
+  //     groupProps: [
+  //       {
+  //         'columns-type': ['year', 'month', 'day'],
+  //         minDate: getMinDate(),
+  //         maxDate: new Date(),
+  //       },
+  //       { 'columns-type': ['hour', 'minute', 'second'] }
+  //     ],
 
-    }
-  },
+  //   }
+  // },
   // {
   //   type: 'date-range-picker',
   //   label: '日期范围',
@@ -340,6 +357,9 @@ const formOptions = ref<XFormItemOption>([
   //   type: 'slot',
   //   label: '插槽',
   //   name: 'customSlot',
+  //   itemProps:{
+  //     disabled: true
+  //   },
   // },
 ])
 const handleClick = (valeu) => {
@@ -365,6 +385,26 @@ const onSubmit = () => {
   }).catch(error => {
     console.log('error', error);
   })
+}
+const onClear = () => {
+  formValue.value = {}
+}
+
+const onChangeColumns = () => {
+  formOptions.value.push({
+    type: 'slot',
+    label: '插槽',
+    name: 'customSlot',
+    itemProps: {
+      disabled: true
+    },
+    required: true
+  })
+}
+const onChangeFormValue = () => {
+  formValue.value = {
+    name: '你好'
+  }
 }
 
 const onSubmit1 = () => {
