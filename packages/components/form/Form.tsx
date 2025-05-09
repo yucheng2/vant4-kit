@@ -53,6 +53,8 @@ export default defineComponent({
             submit: () => formRef.value.submit(),
             getValues: () => formRef.value.getValues(),
             validate: async (name?: string | string[]): Promise<void> => {
+                console.log(formRef.value)
+
                 return await formRef.value?.validate(name)
             },
             resetValidation: (name?: string | string[]) => formRef.value.resetValidation(name),
@@ -68,11 +70,8 @@ export default defineComponent({
             const compReq = itemProps && has(itemProps, 'required') ? (!!itemProps.required) : false;
             return compReq || itemRequired || ruleIsRequired || !!props.required
         }
-        watchEffect(() => {
-            console.log(props.items);
-        })
         return ()=>(
-                <Form ref="formRef" {...attrs} {...props} onSubmit={onSubmit} onFailed={onFailed}>
+                <Form ref={formRef} {...attrs} {...props} onSubmit={onSubmit} onFailed={onFailed}>
                   <CellGroup inset={props.inset}>
                     {props.items.map((item: XFormItemRow, index: number) => {
                       const { vif, type, name, label, itemProps, popup } = item;
