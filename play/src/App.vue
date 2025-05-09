@@ -391,15 +391,20 @@ const onClear = () => {
 }
 
 const onChangeColumns = () => {
-  formOptions.value.push({
-    type: 'slot',
-    label: '插槽',
-    name: 'customSlot',
-    itemProps: {
-      disabled: true
-    },
-    required: true
-  })
+  const formOptionsCopy = JSON.parse(JSON.stringify(formOptions.value))
+  formOptionsCopy.find(item => item.name === 'name')!.required = false
+  // formOptionsCopy.push({
+  //   type: 'slot',
+  //   label: '插槽',
+  //   name: 'customSlot',
+  //   itemProps: {
+  //     disabled: true
+  //   },
+  //   required: true
+  // })
+  formOptions.value = [
+    ...formOptionsCopy
+  ]
 }
 const onChangeFormValue = () => {
   formValue.value = {

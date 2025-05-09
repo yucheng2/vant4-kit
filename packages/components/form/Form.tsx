@@ -68,6 +68,9 @@ export default defineComponent({
             const compReq = itemProps && has(itemProps, 'required') ? (!!itemProps.required) : false;
             return compReq || itemRequired || ruleIsRequired || !!props.required
         }
+        watchEffect(() => {
+            console.log(props.items);
+        })
         return ()=>(
                 <Form ref="formRef" {...attrs} {...props} onSubmit={onSubmit} onFailed={onFailed}>
                   <CellGroup inset={props.inset}>
