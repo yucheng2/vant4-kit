@@ -138,7 +138,7 @@ export default defineComponent({
                 label: label.value,
                 name: name.value,
             };
-            console.log(FieldAttrs);
+            // console.log(FieldAttrs);
             
 
             if (has(config.value.value, 'hiddenLabel') && isBoolean(config.value.value.hiddenLabel) && config.value.value.hiddenLabel) {
@@ -148,7 +148,7 @@ export default defineComponent({
             Object.assign(FieldAttrs, itemAttrs.value);
 
             if (RightIconCompMap.includes(type.value)) {
-                console.log(itemAttrs.value);
+                // console.log(itemAttrs.value);
                 
                 Object.assign(FieldAttrs, {
                     'right-icon': getRightIcon(type.value),

@@ -366,9 +366,9 @@ const handleClick = (valeu) => {
   console.log('handleClick', valeu);
 }
 const rules = {
-  name: [
-    { required: true, message: '请输入姓名', trigger: 'onChange' },
-  ],
+  // name: [
+  //   { required: true, message: '请输入姓名', trigger: 'onChange' },
+  // ],
   // tel: [
   //   { required: true, message: '请输入手机号', trigger: ['onBlur', 'onChange'] },
   //   { pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号', trigger: ['onChange'] },

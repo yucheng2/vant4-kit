@@ -1,4 +1,16 @@
-import {defineComponent, toRefs, ref, provide, type PropType, type ExtractPropTypes, watchEffect, useAttrs, getCurrentInstance, toRef} from "vue";
+import {
+    defineComponent,
+    toRefs,
+    ref,
+    provide,
+    type PropType,
+    type ExtractPropTypes,
+    watchEffect,
+    useAttrs,
+    getCurrentInstance,
+    toRef,
+    computed
+} from "vue";
 import type { XFormItemRow, XFormItemOption, FormProvideProps, ProvideEventTypes } from "./types";
 import { Form, CellGroup, formProps, type FieldRule } from 'vant'
 import { at, has, isFunction } from "lodash-es";
@@ -53,15 +65,12 @@ export default defineComponent({
             submit: () => formRef.value.submit(),
             getValues: () => formRef.value.getValues(),
             validate: async (name?: string | string[]): Promise<void> => {
-                console.log(formRef.value)
-
                 return await formRef.value?.validate(name)
             },
             resetValidation: (name?: string | string[]) => formRef.value.resetValidation(name),
             getValidationStatus: () => formRef.value.getValidationStatus(),
             scrollToField: (name: string, alignToTop: boolean) => formRef.value.scrollToField(name, alignToTop),
         })
-
         /* 处理是否必填 */
         const getRequired = (row: XFormItemRow): boolean => {
             const { itemProps, name } = row
