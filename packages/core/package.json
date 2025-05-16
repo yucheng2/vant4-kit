@@ -1,6 +1,6 @@
 {
   "name": "@yucheng2/vant4-kit",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "一款基于 Vant4.x 的增强组件库",
   "type": "module",
   "main": "./dist/umd/index.umd.cjs",
