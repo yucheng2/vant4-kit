@@ -97,6 +97,7 @@ export default defineComponent({
                               label={label}
                               options={item.options}
                               config={item}
+                              disabled={props.disabled}
                               required={getRequired(item)}
                               readonly={props.readonly}
                               popup={popup}

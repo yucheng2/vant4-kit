@@ -1,11 +1,31 @@
-import {type PropType, defineComponent, inject, ref, renderSlot, watchEffect, toRef, computed, toRefs } from "vue";
-import { Switch, Checkbox, CheckboxGroup, Radio, RadioGroup, Stepper, Rate, Slider, Field, Popup, Picker, Area, DatePicker, TimePicker, Cascader, PickerGroup, type PickerConfirmEventParams, type DatePickerProps, type TimePickerProps } from 'vant'
-import { has, isArray, isBoolean, isFunction, } from "lodash-es";
-import { getPlaceholder, getRules, getRightIcon } from './utils'
-import { areaList, useCascaderAreaData } from '@vant/area-data'
-import { RightIconCompMap, CompsEventsMap } from "./constatnts";
-import { XDatetimePicker } from '../datetime-picker'
-import type { CompAttrsPropsMap, CompTypes, FormProvideProps, PickerOption, XFormItemRow } from "./types";
+import {type PropType, defineComponent, inject, ref, renderSlot, watchEffect, toRef, computed, toRefs} from "vue";
+import {
+    Switch,
+    Checkbox,
+    CheckboxGroup,
+    Radio,
+    RadioGroup,
+    Stepper,
+    Rate,
+    Slider,
+    Field,
+    Popup,
+    Picker,
+    Area,
+    DatePicker,
+    TimePicker,
+    Cascader,
+    PickerGroup,
+    type PickerConfirmEventParams,
+    type DatePickerProps,
+    type TimePickerProps
+} from 'vant'
+import {has, isArray, isBoolean, isFunction,} from "lodash-es";
+import {getPlaceholder, getRules, getRightIcon} from './utils'
+import {areaList, useCascaderAreaData} from '@vant/area-data'
+import {RightIconCompMap, CompsEventsMap} from "./constatnts";
+import {XDatetimePicker} from '../datetime-picker'
+import type {CompAttrsPropsMap, CompTypes, FormProvideProps, PickerOption, XFormItemRow} from "./types";
 
 export default defineComponent({
     props: {
@@ -52,10 +72,27 @@ export default defineComponent({
             type: Object as PropType<any>,
             default: () => ({})
         },
+        disabled: {
+            type: Boolean,
+            default: false
+        }
     },
-    setup(props, { }) {
-        const { type, label, name, required, readonly, options, itemAttrs, orgAttrs, popup, config, formValue } = toRefs(props)
-        const { formSlots, rules, onEvents } = inject('x-form') as FormProvideProps
+    setup(props, {}) {
+        const {
+            type,
+            label,
+            name,
+            required,
+            readonly,
+            options,
+            itemAttrs,
+            orgAttrs,
+            popup,
+            config,
+            formValue,
+            disabled
+        } = toRefs(props)
+        const {formSlots, rules, onEvents} = inject('x-form') as FormProvideProps
         const showPopup = ref(false)
         /* 事件收集器 */
         const eventsCollector = () => {
@@ -104,7 +141,9 @@ export default defineComponent({
             }
 
             if (has(formSlots, `${name.value}.error-message`) || isHas('error-message')) {
-                slots['error-message'] = ({ message }: { message: string }) => has(formSlots, `${name.value}.error-message`) ? renderSlot(formSlots, `${name.value}.error-message`, { message }) : renderSlotName('error-message', { message })
+                slots['error-message'] = ({message}: {
+                    message: string
+                }) => has(formSlots, `${name.value}.error-message`) ? renderSlot(formSlots, `${name.value}.error-message`, {message}) : renderSlotName('error-message', {message})
             }
 
             if (has(formSlots, `${name.value}.button`) || isHas('button')) {
@@ -137,9 +176,8 @@ export default defineComponent({
                 rules: getRules(required.value, newRules, label.value),
                 label: label.value,
                 name: name.value,
+                disabled: props.disabled,
             };
-            // console.log(FieldAttrs);
-            
 
             if (has(config.value.value, 'hiddenLabel') && isBoolean(config.value.value.hiddenLabel) && config.value.value.hiddenLabel) {
                 FieldAttrs['class'] = 'xform-hidden-label';
@@ -149,7 +187,7 @@ export default defineComponent({
 
             if (RightIconCompMap.includes(type.value)) {
                 // console.log(itemAttrs.value);
-                
+
                 Object.assign(FieldAttrs, {
                     'right-icon': getRightIcon(type.value),
                     readonly: true,
@@ -157,7 +195,7 @@ export default defineComponent({
                         if (readonly.value) return;
                         showPopup.value = true;
                     },
-                    onClick:()=>{
+                    onClick: () => {
                         if (readonly.value) return;
                         showPopup.value = true;
                     }
@@ -174,9 +212,9 @@ export default defineComponent({
         const compGenerator: { [k in CompTypes]: any } = {
             'input': () => {
                 return <Field v-model={formValue.value[name.value]}
-                    {...eventsCollector()}
-                    {...getBasicConfig()}
-                    v-slots={handlerSlot()} />
+                              {...eventsCollector()}
+                              {...getBasicConfig()}
+                              v-slots={handlerSlot()}/>
             },
             'picker': () => {
                 return <>
@@ -193,7 +231,7 @@ export default defineComponent({
                             {...eventsCollector()}
                             {...orgAttrs.value}
                             onConfirm={(...args: any) => {
-                                const [{ selectedOptions }] = args
+                                const [{selectedOptions}] = args
                                 formValue.value[`${name.value}Text`] = selectedOptions.map((item: any) => item.text).join('/')
                                 closePopup()
                                 onEvents('confirm', name.value, ...args)
@@ -208,7 +246,8 @@ export default defineComponent({
             },
             'area': () => {
                 return <>
-                    <Field v-model={formValue.value[`${name.value}Text`]} {...getBasicConfig()} v-slots={handlerSlot()} />
+                    <Field v-model={formValue.value[`${name.value}Text`]} {...getBasicConfig()}
+                           v-slots={handlerSlot()}/>
                     {renderPopup(
                         <Area
                             v-model={formValue.value[name.value]}
@@ -217,7 +256,7 @@ export default defineComponent({
                             {...eventsCollector()}
                             {...orgAttrs.value}
                             onConfirm={(...args: any) => {
-                                const [{ selectedOptions }] = args
+                                const [{selectedOptions}] = args
                                 formValue.value[`${name.value}Text`] = selectedOptions.map((item: any) => item.text).join('/')
                                 closePopup()
                                 onEvents('confirm', name.value, ...args)
@@ -233,7 +272,8 @@ export default defineComponent({
                 const areaOptions = useCascaderAreaData()
 
                 return <>
-                    <Field v-model={formValue.value[`${name.value}Text`]} {...getBasicConfig()} v-slots={handlerSlot()} />
+                    <Field v-model={formValue.value[`${name.value}Text`]} {...getBasicConfig()}
+                           v-slots={handlerSlot()}/>
 
                     {renderPopup(
                         <Cascader
@@ -243,7 +283,7 @@ export default defineComponent({
                             {...eventsCollector()}
                             {...orgAttrs.value}
                             onFinish={(...args: any) => {
-                                const [{ selectedOptions }] = args
+                                const [{selectedOptions}] = args
                                 formValue.value[`${name.value}Text`] = selectedOptions.map((item: any) => item.text).join('/')
                                 closePopup()
                                 onEvents('finish', name.value, ...args)
@@ -259,7 +299,8 @@ export default defineComponent({
             'date-picker': () => {
                 const curYear = new Date().getFullYear();
                 return <>
-                    <Field v-model={formValue.value[`${name.value}Text`]} {...getBasicConfig()} v-slots={handlerSlot()} />
+                    <Field v-model={formValue.value[`${name.value}Text`]} {...getBasicConfig()}
+                           v-slots={handlerSlot()}/>
                     {/* 日期选择器Popup */}
                     {renderPopup(
                         <DatePicker
@@ -283,7 +324,8 @@ export default defineComponent({
             },
             'time-picker': () => {
                 return <>
-                    <Field v-model={formValue.value[`${name.value}Text`]} {...getBasicConfig()} v-slots={handlerSlot()} />
+                    <Field v-model={formValue.value[`${name.value}Text`]} {...getBasicConfig()}
+                           v-slots={handlerSlot()}/>
                     {/* 时间选择器popup */}
                     {renderPopup(
                         <TimePicker
@@ -358,25 +400,26 @@ export default defineComponent({
                             </PickerGroup>;
                         case 'single':
                             return <XDatetimePicker v-model={formValue.value[name.value]}
-                                title={`请选择${label.value}`}
-                                {...eventsCollector()}
-                                {...(has(curAttrs, 'groupProps') ? curAttrs['groupProps'] : {})}
-                                onConfirm={(...args: any) => {
-                                    const [{ selectedValues }] = args as PickerConfirmEventParams[]
-                                    formValue.value[name.value] = selectedValues
-                                    const dateTime = `${selectedValues.slice(0, 3).join('-')} ${selectedValues.slice(3).join(':')}`
-                                    formValue.value[`${name.value}Text`] = dateTime
-                                    closePopup()
-                                    onEvents('confirm', name.value, ...args)
-                                }}
-                                onChange={(...args: any) => onEvents('change', name.value, ...args)}
-                                onCancel={onCancel}
-                                v-slots={handlerCompSlots()}
+                                                    title={`请选择${label.value}`}
+                                                    {...eventsCollector()}
+                                                    {...(has(curAttrs, 'groupProps') ? curAttrs['groupProps'] : {})}
+                                                    onConfirm={(...args: any) => {
+                                                        const [{selectedValues}] = args as PickerConfirmEventParams[]
+                                                        formValue.value[name.value] = selectedValues
+                                                        const dateTime = `${selectedValues.slice(0, 3).join('-')} ${selectedValues.slice(3).join(':')}`
+                                                        formValue.value[`${name.value}Text`] = dateTime
+                                                        closePopup()
+                                                        onEvents('confirm', name.value, ...args)
+                                                    }}
+                                                    onChange={(...args: any) => onEvents('change', name.value, ...args)}
+                                                    onCancel={onCancel}
+                                                    v-slots={handlerCompSlots()}
                             />;
                     }
                 }
                 return <>
-                    <Field v-model={formValue.value[`${name.value}Text`]} {...getBasicConfig()} v-slots={handlerSlot()} />
+                    <Field v-model={formValue.value[`${name.value}Text`]} {...getBasicConfig()}
+                           v-slots={handlerSlot()}/>
                     {/* 日期时间选择器Popup */}
                     {renderPopup(renderComp())}
                 </>
@@ -407,7 +450,8 @@ export default defineComponent({
                 }
 
                 return <>
-                    <Field v-model={formValue.value[`${name.value}Text`]} {...getBasicConfig()} v-slots={handlerSlot()} />
+                    <Field v-model={formValue.value[`${name.value}Text`]} {...getBasicConfig()}
+                           v-slots={handlerSlot()}/>
 
                     {/* 日期范围选择器Popup */}
                     {renderPopup(<PickerGroup
@@ -458,7 +502,8 @@ export default defineComponent({
                     return [startTimeAttrs, endTimeAttrs]
                 }
                 return <>
-                    <Field v-model={formValue.value[`${name.value}Text`]}  {...getBasicConfig()} v-slots={handlerSlot()} />
+                    <Field v-model={formValue.value[`${name.value}Text`]}  {...getBasicConfig()}
+                           v-slots={handlerSlot()}/>
                     {/* 日期时间选择器Popup */}
                     {renderPopup(<PickerGroup
                         title={`请选择${label.value}`}
@@ -503,7 +548,8 @@ export default defineComponent({
                     return [startAttrs, endAttrs]
                 }
                 return <>
-                    <Field v-model={formValue.value[`${name.value}Text`]} {...getBasicConfig()} v-slots={handlerSlot()} />
+                    <Field v-model={formValue.value[`${name.value}Text`]} {...getBasicConfig()}
+                           v-slots={handlerSlot()}/>
                     {/* 日期时间选择器Popup */}
                     {renderPopup(<PickerGroup
                         title={`请选择${label.value}`}
@@ -511,7 +557,7 @@ export default defineComponent({
                         {...curAttrs}
                         tabs={has(curAttrs, 'tabs') ? curAttrs['tabs'] : ['开始时间', '结束时间']}
                         onConfirm={(...args: any) => {
-                            const { start, end } = dtrValue.value
+                            const {start, end} = dtrValue.value
                             formValue.value[name.value] = [dtrValue.value.start, dtrValue.value.end]
                             const startStr = `${start.slice(0, 3).join('-')} ${start.slice(3).join(':')}`
                             const sendStr = `${end.slice(0, 3).join('-')} ${end.slice(3).join(':')}`
@@ -565,20 +611,20 @@ export default defineComponent({
             // },
             'radio': () => {
                 return <Field {...getBasicConfig()}
-                    v-slots={{
-                        input: () => <RadioGroup
-                            v-model={formValue.value[name.value]}
-                            {...eventsCollector()}
-                            {...(orgAttrs.value as CompAttrsPropsMap['radio'])}
-                            class={{ 'readonly-radio': readonly.value }}
-                            disabled={readonly.value || (has(orgAttrs.value, 'disabled') && (!!orgAttrs.value.disabled))}
-                            v-slots={handlerCompSlots()}
-                        >
-                            {options.value?.map((item: any) => {
-                                return <Radio  {...item.attrs} name={item.value}>{item.text}</Radio>
-                            })}
-                        </RadioGroup>
-                    }}
+                              v-slots={{
+                                  input: () => <RadioGroup
+                                      v-model={formValue.value[name.value]}
+                                      {...eventsCollector()}
+                                      {...(orgAttrs.value as CompAttrsPropsMap['radio'])}
+                                      class={{'readonly-radio': readonly.value}}
+                                      disabled={readonly.value || (has(orgAttrs.value, 'disabled') && (!!orgAttrs.value.disabled))}
+                                      v-slots={handlerCompSlots()}
+                                  >
+                                      {options.value?.map((item: any) => {
+                                          return <Radio  {...item.attrs} name={item.value}>{item.text}</Radio>
+                                      })}
+                                  </RadioGroup>
+                              }}
                 />
             },
             'checkbox': () => {
@@ -591,12 +637,12 @@ export default defineComponent({
                                 v-model={formValue.value[name.value]}
                                 {...eventsCollector()}
                                 {...(orgAttrs.value as CompAttrsPropsMap['checkbox'])}
-                                class={{ 'readonly-checkbox': readonly.value }}
+                                class={{'readonly-checkbox': readonly.value}}
                                 disabled={readonly.value || (has(orgAttrs.value, 'disabled') && (!!orgAttrs.value.disabled))}
                                 v-slots={handlerCompSlots()}
                             >
                                 {options.value?.map((item: any) => {
-                                    return <Checkbox  {...item.attrs} name={item.value} >{item.text}</Checkbox>
+                                    return <Checkbox  {...item.attrs} name={item.value}>{item.text}</Checkbox>
                                 })}
                             </CheckboxGroup>
                         }
@@ -610,11 +656,11 @@ export default defineComponent({
                         ...handlerSlot(),
                         input: () => {
                             return <Switch v-model={formValue.value[name.value]}
-                                {...eventsCollector()}
-                                {...(orgAttrs.value as CompAttrsPropsMap['switch'])}
-                                class={{ 'readonly-switch': readonly.value }}
-                                disabled={readonly.value || (has(orgAttrs.value, 'disabled') && (!!orgAttrs.value.disabled))}
-                                v-slots={handlerCompSlots()}
+                                           {...eventsCollector()}
+                                           {...(orgAttrs.value as CompAttrsPropsMap['switch'])}
+                                           class={{'readonly-switch': readonly.value}}
+                                           disabled={readonly.value || (has(orgAttrs.value, 'disabled') && (!!orgAttrs.value.disabled))}
+                                           v-slots={handlerCompSlots()}
                             />
                         }
                     }}
@@ -627,10 +673,10 @@ export default defineComponent({
                         ...handlerSlot(),
                         input: () => {
                             return <Rate v-model={formValue.value[name.value]}
-                                {...eventsCollector()}
-                                {...(orgAttrs.value as CompAttrsPropsMap['rate'])}
-                                readonly={readonly.value || (has(orgAttrs.value, 'readonly') && (!!orgAttrs.value.readonly))}
-                                v-slots={handlerCompSlots()}
+                                         {...eventsCollector()}
+                                         {...(orgAttrs.value as CompAttrsPropsMap['rate'])}
+                                         readonly={readonly.value || (has(orgAttrs.value, 'readonly') && (!!orgAttrs.value.readonly))}
+                                         v-slots={handlerCompSlots()}
                             />
                         }
                     }}
@@ -644,13 +690,17 @@ export default defineComponent({
                         ...handlerSlot(),
                         input: () => {
                             return <Slider v-model={formValue.value[name.value]}
-                                {...eventsCollector()}
-                                {...(orgAttrs.value as CompAttrsPropsMap['slider'])}
-                                class={{ 'readonly-slider': readonly.value }}
-                                disabled={readonly.value || (has(orgAttrs.value, 'disabled') && (!!orgAttrs.value.disabled))}
-                                onDragStart={(...args: any) => { onEvents('drag-start', name.value, ...args) }}
-                                onDragEnd={(...args: any) => { onEvents('drag-end', name.value, ...args) }}
-                                v-slots={handlerCompSlots()}
+                                           {...eventsCollector()}
+                                           {...(orgAttrs.value as CompAttrsPropsMap['slider'])}
+                                           class={{'readonly-slider': readonly.value}}
+                                           disabled={readonly.value || (has(orgAttrs.value, 'disabled') && (!!orgAttrs.value.disabled))}
+                                           onDragStart={(...args: any) => {
+                                               onEvents('drag-start', name.value, ...args)
+                                           }}
+                                           onDragEnd={(...args: any) => {
+                                               onEvents('drag-end', name.value, ...args)
+                                           }}
+                                           v-slots={handlerCompSlots()}
                             />
                         }
                     }}
@@ -664,14 +714,20 @@ export default defineComponent({
                         ...handlerSlot(),
                         input: () => {
                             return <Stepper v-model={formValue.value[name.value]}
-                                {...eventsCollector()}
-                                {...(orgAttrs.value as CompAttrsPropsMap['stepper'])}
-                                class={{ 'readonly-stepper': readonly.value }}
-                                disabled={readonly.value || (has(orgAttrs.value, 'disabled') && (!!orgAttrs.value.disabled))}
-                                onPlus={(...args: any) => { onEvents('plus', name.value, ...args) }}
-                                onMinus={(...args: any) => { onEvents('minus', name.value, ...args) }}
-                                onOverlimit={(...args: any[]) => { onEvents('overlimit', name.value, ...args) }}
-                                v-slots={handlerCompSlots()}
+                                            {...eventsCollector()}
+                                            {...(orgAttrs.value as CompAttrsPropsMap['stepper'])}
+                                            class={{'readonly-stepper': readonly.value}}
+                                            disabled={readonly.value || (has(orgAttrs.value, 'disabled') && (!!orgAttrs.value.disabled))}
+                                            onPlus={(...args: any) => {
+                                                onEvents('plus', name.value, ...args)
+                                            }}
+                                            onMinus={(...args: any) => {
+                                                onEvents('minus', name.value, ...args)
+                                            }}
+                                            onOverlimit={(...args: any[]) => {
+                                                onEvents('overlimit', name.value, ...args)
+                                            }}
+                                            v-slots={handlerCompSlots()}
                             />
                         }
                     }}
@@ -690,7 +746,8 @@ export default defineComponent({
                 {...getBasicConfig()}
                 v-slots={{
                     ...handlerSlot(),
-                    input: () => <div v-html={formValue.value[name.value]} {...(orgAttrs.value as CompAttrsPropsMap['html'])}></div>
+                    input: () => <div
+                        v-html={formValue.value[name.value]} {...(orgAttrs.value as CompAttrsPropsMap['html'])}></div>
                 }}
             />,
             'input-slot': () => <Field
