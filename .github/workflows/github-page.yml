@@ -70,7 +70,7 @@ jobs:
 
       - name: Build
         run: |
-          pnpm run build
+          pnpm doc:build
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -79,7 +79,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload dist folder
-          path: './docs/.vitepress/dist'
+          path: 'docs/.vitepress/dist'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
