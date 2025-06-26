@@ -2,6 +2,8 @@ import { defineConfig } from 'vitepress'
 import { mdPlugin } from './config/plugin'
 import { mergePath } from './utils'
 export default defineConfig({
+  outDir: '../public',
+  base: '/vant4-kit/',
   title: "@yucheng2/vant4-kit",
   description: "让开发更简单",
   head: [
