@@ -29,7 +29,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node-version: [ 20 ]
+        node-version: [ 22 ]
         os:
           - ubuntu-latest
 #          - macos-latest
@@ -70,7 +70,7 @@ jobs:
 
       - name: Build
         run: |
-          pnpm doc:build
+          pnpm build && pnpm doc:build
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
