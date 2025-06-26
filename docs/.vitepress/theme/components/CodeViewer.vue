@@ -30,7 +30,7 @@ import { useClipboard } from '@vueuse/core'
 import { showFailToast, showSuccessToast } from 'vant'
 // const DEMO_RUN_URL = 'http://localhost:5173'
 // const DEMO_RUN_URL = 'https://vant4-kit-moblie.netlify.app'
-const DEMO_RUN_URL = 'https://@yucheng2.vant4-kit-moblie.netlify.app'
+const DEMO_RUN_URL = 'https://yucheng2-vant4-kit-moblie.netlify.app'
 const props = defineProps({
     code: {
         type: String,
