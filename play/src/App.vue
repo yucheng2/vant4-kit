@@ -1,11 +1,8 @@
 <template>
   <div class="container">
+<!--    disabled :readonly="true"-->
     <x-form ref="formRef" label-align="top" :model="formValue" :items="formOptions" :rules="rules" inset
-      @failed="onFailed" @change="onXFormChange" @confirm="onXFormConfirm">
-      <template #customSlot="item">
-        {{ item }}
-        <SlotTest></SlotTest>
-      </template>
+            @failed="onFailed" @change="onXFormChange" @confirm="onXFormConfirm">
       <template #customSlot1>
         <h2>333</h2>
       </template>
@@ -36,10 +33,10 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, watch, h } from 'vue'
-import { Button, type FormInstance } from 'vant'
-import type { XFormItemOption, XFormItemRow } from '@vant4-kit/components'
-import { XForm } from '@vant4-kit/components'
+import {ref, watch, h} from 'vue'
+import {Button, type FormInstance} from 'vant'
+import type {XFormItemOption, XFormItemRow} from '@vant4-kit/components'
+import {XForm} from '@vant4-kit/components'
 import dayjs from 'dayjs'
 import SlotTest from "./components/SlotTest.vue";
 
@@ -48,27 +45,29 @@ const formRef1 = ref<FormInstance>()
 const formValue = ref<any>({
   text: 'text 文本', html: '<h3>我是html</h3> ',
 })
+
 // 时间范围需在30日之内；
 function getMinDate() {
   return dayjs().subtract(30, 'day').toDate();
 }
+
 const formOptions = ref<XFormItemOption>([
-  {
-    label: 'Input 输入框',
-    type: 'input',
-    name: 'name',
-    required: true,
-    vif: (values: any) => {
-      // console.log('vif values =', values);
-      return true
-    }
-  },
+  // {
+  //   label: 'Input 输入框',
+  //   type: 'input',
+  //   name: 'name',
+  //   required: true,
+  //   vif: (values: any) => {
+  //     // console.log('vif values =', values);
+  //     return true
+  //   }
+  // },
   // {
   //   label: '手机号',
   //   type: 'input',
   //   name: 'tel',
   //   rules: [
-  //     { pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号', trigger: ['onChange', 'onBlur'] },
+  //     { pattern: /^1[3456789]d{9}$/, message: '请输入正确的手机号', trigger: ['onChange', 'onBlur'] },
   //   ],
   //   itemProps: {
   //     required: true,
@@ -248,14 +247,18 @@ const formOptions = ref<XFormItemOption>([
   //     // 'columns-type': ['year']
   //   }
   // },
-  // {
-  //   type: 'date-picker',
-  //   label: '日期选择器',
-  //   name: 'datePicker2',
-  //   attrs: {
-  //     'columns-type': ['year']
-  //   },
-  // },
+  {
+    type: 'date-picker',
+    label: '日期选择器',
+    name: 'datePicker2',
+    attrs: {
+      'columns-type': ['year', 'month', 'day']
+    },
+    itemProps:{
+      disabled: true,
+      readonly: true
+    }
+  },
   // {
   //   type: 'time-picker',
   //   label: '时间选择器',
@@ -277,26 +280,24 @@ const formOptions = ref<XFormItemOption>([
   //     // ]
   //   }
   // },
-  // {
-  //   type: 'datetime-picker',
-  //   label: '日期时间选择',
-  //   name: 'datetimePicker2',
-  //   itemProps: {
-  //     disabled: true,
-  //   },
-  //   attrs: {
-  //     showType: 'group',
-  //     groupProps: [
-  //       {
-  //         'columns-type': ['year', 'month', 'day'],
-  //         minDate: getMinDate(),
-  //         maxDate: new Date(),
-  //       },
-  //       { 'columns-type': ['hour', 'minute', 'second'] }
-  //     ],
+  {
+    type: 'datetime-picker',
+    label: '日期时间选择',
+    name: 'datetimePicker2',
+    itemProps: {},
+    attrs: {
+      showType: 'group',
+      groupProps: [
+        {
+          'columns-type': ['year', 'month', 'day'],
+          minDate: getMinDate(),
+          maxDate: new Date(),
+        },
+        {'columns-type': ['hour', 'minute']}
+      ],
 
-  //   }
-  // },
+    }
+  },
   // {
   //   type: 'date-range-picker',
   //   label: '日期范围',
@@ -353,14 +354,11 @@ const formOptions = ref<XFormItemOption>([
   //   label: '插槽',
   //   name: 'customSlot1',
   // },
-  // {
-  //   type: 'slot',
-  //   label: '插槽',
-  //   name: 'customSlot',
-  //   itemProps:{
-  //     disabled: true
-  //   },
-  // },
+  {
+    type: 'slot',
+    label: '插槽',
+    name: 'customSlot',
+  },
 ])
 const handleClick = (valeu) => {
   console.log('handleClick', valeu);
@@ -371,13 +369,13 @@ const rules = {
   // ],
   // tel: [
   //   { required: true, message: '请输入手机号', trigger: ['onBlur', 'onChange'] },
-  //   { pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号', trigger: ['onChange'] },
+  //   { pattern: /^1[3456789]d{9}$/, message: '请输入正确的手机号', trigger: ['onChange'] },
   // ],
 }
 
 watch(formValue, (val) => {
   console.log('watch formValues =', val)
-}, { deep: true })
+}, {deep: true})
 
 const onSubmit = () => {
   formRef.value?.validate().then(() => {
@@ -408,7 +406,12 @@ const onChangeColumns = () => {
 }
 const onChangeFormValue = () => {
   formValue.value = {
-    name: '你好'
+    datePicker2:
+        ['2026', '5', '10'],
+    datetimePicker2: [
+      ['2026', '5', '10'],
+      ['1', '1']
+    ]
   }
 }
 

@@ -38,6 +38,7 @@ const formOptions = ref<XFormItemOption>([
     name: 'number',
     itemProps: {
       type: 'number',
+      disabled: true
     }
   },
   {

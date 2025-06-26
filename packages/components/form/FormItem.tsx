@@ -185,21 +185,30 @@ export default defineComponent({
 
             Object.assign(FieldAttrs, itemAttrs.value);
 
+            const isDisabled = FieldAttrs.disabled || FieldAttrs.readonly
+
             if (RightIconCompMap.includes(type.value)) {
                 // console.log(itemAttrs.value);
-
+                
                 Object.assign(FieldAttrs, {
-                    'right-icon': getRightIcon(type.value),
+                    'right-icon': !isDisabled && getRightIcon(type.value),
                     readonly: true,
                     onClickRightIcon: () => {
                         if (readonly.value) return;
+                        if(FieldAttrs.disabled) return
+                        if(FieldAttrs.readonly) return
                         showPopup.value = true;
                     },
                     onClick: () => {
                         if (readonly.value) return;
+                        if(FieldAttrs.disabled) return
+                        if(FieldAttrs.readonly) return
                         showPopup.value = true;
                     }
                 })
+                if(FieldAttrs.disabled || FieldAttrs.readonly){
+                    type.value = ''
+                }
             }
             return Object.assign(FieldAttrs, row)
         }
