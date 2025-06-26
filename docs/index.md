@@ -4,7 +4,9 @@ layout: home
 hero:
   name: Vant4 Kit
   text: 加速开发，早点下班
-  tagline: 🌈 简单，提效，易用
+  tagline: 
+    - 🌈 简单，提效，易用
+    - fork https://github.com/mitjs/vant4-kit
   image:
     src: ./logo.png
     alt: Vant4 Kit
