@@ -28,8 +28,9 @@ import PreviewIcon from './preview-icon.vue'
 import NoPreviewIcon from './no-preview-icon.vue'
 import { useClipboard } from '@vueuse/core'
 import { showFailToast, showSuccessToast } from 'vant'
-const DEMO_RUN_URL = 'http://localhost:5173'
+// const DEMO_RUN_URL = 'http://localhost:5173'
 // const DEMO_RUN_URL = 'https://vant4-kit-moblie.netlify.app'
+const DEMO_RUN_URL = 'https://yucheng2.github.io/vant4-kit'
 const props = defineProps({
     code: {
         type: String,
