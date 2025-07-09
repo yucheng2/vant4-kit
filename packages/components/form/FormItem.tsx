@@ -194,19 +194,15 @@ export default defineComponent({
                     'right-icon': !isDisabled && getRightIcon(type.value),
                     readonly: true,
                     onClickRightIcon: () => {
-                        if (readonly.value) return;
                         if(FieldAttrs.disabled) return
-                        if(FieldAttrs.readonly) return
                         showPopup.value = true;
                     },
                     onClick: () => {
-                        if (readonly.value) return;
                         if(FieldAttrs.disabled) return
-                        if(FieldAttrs.readonly) return
                         showPopup.value = true;
                     }
                 })
-                if(FieldAttrs.disabled || FieldAttrs.readonly){
+                if(FieldAttrs.disabled){
                     type.value = ''
                 }
             }
