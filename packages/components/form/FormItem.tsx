@@ -185,7 +185,7 @@ export default defineComponent({
 
             Object.assign(FieldAttrs, itemAttrs.value);
 
-            const isDisabled = FieldAttrs.disabled || FieldAttrs.readonly
+            const isDisabled = FieldAttrs.disabled
 
             if (RightIconCompMap.includes(type.value)) {
                 // console.log(itemAttrs.value);
@@ -202,9 +202,6 @@ export default defineComponent({
                         showPopup.value = true;
                     }
                 })
-                if(FieldAttrs.disabled){
-                    type.value = ''
-                }
             }
             return Object.assign(FieldAttrs, row)
         }

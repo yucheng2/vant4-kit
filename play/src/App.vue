@@ -246,6 +246,9 @@ const formOptions = ref<XFormItemOption>([
     name: 'datePicker',
     attrs: {
       // 'columns-type': ['year']
+    },
+    itemProps:{
+      disabled: true,
     }
   },
   {
@@ -257,7 +260,6 @@ const formOptions = ref<XFormItemOption>([
     },
     itemProps:{
       disabled: true,
-      readonly: true
     }
   },
   {
