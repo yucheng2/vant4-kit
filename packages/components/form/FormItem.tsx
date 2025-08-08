@@ -20,7 +20,7 @@ import {
     type DatePickerProps,
     type TimePickerProps
 } from 'vant'
-import {has, isArray, isBoolean, isFunction,} from "lodash-es";
+import {has, isArray, isBoolean, isFunction, isNumber,} from "lodash-es";
 import {getPlaceholder, getRules, getRightIcon} from './utils'
 import {areaList, useCascaderAreaData} from '@vant/area-data'
 import {RightIconCompMap, CompsEventsMap} from "./constatnts";
@@ -207,7 +207,19 @@ export default defineComponent({
         }
         const onCancel = () => {
             closePopup()
+            clearField(name.value, type.value)
             onEvents('cancel', name.value)
+        }
+        const clearField = (name: string, type: CompTypes) => {
+            const value = formValue.value[name] 
+            if(isArray(value) || type === 'area'){
+                formValue.value[name] = []
+                formValue.value[name+'Text'] = ''
+            }else  if(isNumber(value)){
+                formValue.value[name] = 0
+            }else{
+                formValue.value[name] = ''
+            }
         }
         const closePopup = () => showPopup.value = false;
 
@@ -240,6 +252,7 @@ export default defineComponent({
                             }}
                             onChange={(...args: any) => onEvents('change', name.value, ...args)}
                             onCancel={onCancel}
+                            cancelButtonText="重置"
                             v-slots={handlerCompSlots()}
                         />
                     )}
@@ -265,6 +278,7 @@ export default defineComponent({
                             }}
                             onChange={(...args: any) => onEvents('change', name.value, ...args)}
                             onCancel={onCancel}
+                            cancelButtonText="重置"
                             v-slots={handlerCompSlots()}
                         />
                     )}
@@ -342,6 +356,7 @@ export default defineComponent({
                             }}
                             onChange={(...args: any) => onEvents('change', name.value, ...args)}
                             onCancel={onCancel}
+                            cancelButtonText="重置"
                             v-slots={handlerCompSlots()}
                         />
                     )}
@@ -389,6 +404,7 @@ export default defineComponent({
                                 }}
                                 onChange={(...args: any) => onEvents('change', name.value, ...args)}
                                 onCancel={onCancel}
+                                cancelButtonText="重置"
                                 v-slots={handlerCompSlots()}
                             >
                                 <DatePicker
@@ -415,6 +431,7 @@ export default defineComponent({
                                                     }}
                                                     onChange={(...args: any) => onEvents('change', name.value, ...args)}
                                                     onCancel={onCancel}
+                                                    cancelButtonText="重置"
                                                     v-slots={handlerCompSlots()}
                             />;
                     }
@@ -468,7 +485,8 @@ export default defineComponent({
                             onEvents('confirm', name.value, ...args)
                         }}
                         onChange={(...args: any) => onEvents('change', name.value, ...args)}
-                        onCancel={closePopup}
+                        onCancel={onCancel}
+                        cancelButtonText="重置"
                         v-slots={handlerCompSlots()}
                     >
                         <DatePicker
@@ -519,7 +537,8 @@ export default defineComponent({
                             onEvents('confirm', name.value, ...args)
                         }}
                         onChange={(...args: any) => onEvents('change', name.value, ...args)}
-                        onCancel={closePopup}
+                        onCancel={onCancel}
+                        cancelButtonText="重置"
                         v-slots={handlerCompSlots()}
                     >
                         <TimePicker v-model={trValue.value.start} {...defaultTime(curAttrs)[0]} />
@@ -568,7 +587,8 @@ export default defineComponent({
                             onEvents('confirm', name.value, ...args)
                         }}
                         onChange={(...args: any) => onEvents('change', name.value, ...args)}
-                        onCancel={closePopup}
+                        onCancel={onCancel}
+                        cancelButtonText="重置"
                         v-slots={handlerCompSlots()}
                     >
                         <XDatetimePicker v-model={dtrValue.value.start} {...handleDatetimeAttrs(curAttrs)[0]} />

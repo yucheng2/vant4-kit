@@ -13,9 +13,11 @@
   "scripts": {
     "dev": "pnpm --filter @vant4-kit/play dev",
     "start": "run-p doc:dev moblie:dev",
+    "play": "pnpm build && pnpm build:play && pnpm preview",
     "doc:dev": "pnpm --filter @vant4-kit/docs dev",
     "moblie:dev": "pnpm --filter @vant4-kit/iframe-web dev",
     "build": "pnpm --filter @yucheng2/vant4-kit build",
+    "build:play": "pnpm --filter @vant4-kit/play build",
     "doc:build": "pnpm --filter @vant4-kit/docs build",
     "preview": "pnpm --filter @vant4-kit/play preview",
     "doc:preview": "pnpm --filter @vant4-kit/docs preview"
