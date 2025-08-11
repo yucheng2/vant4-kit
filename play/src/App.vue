@@ -247,9 +247,9 @@ const formOptions = ref<XFormItemOption>([
     attrs: {
       // 'columns-type': ['year']
     },
-    itemProps:{
-      disabled: true,
-    }
+    // itemProps:{
+    //   disabled: true,
+    // }
   },
   {
     type: 'date-picker',
@@ -258,9 +258,9 @@ const formOptions = ref<XFormItemOption>([
     attrs: {
       'columns-type': ['year', 'month', 'day']
     },
-    itemProps:{
-      disabled: true,
-    }
+    // itemProps:{
+    //   disabled: true,
+    // }
   },
   {
     type: 'time-picker',

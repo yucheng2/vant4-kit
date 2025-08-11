@@ -252,7 +252,7 @@ export default defineComponent({
                             }}
                             onChange={(...args: any) => onEvents('change', name.value, ...args)}
                             onCancel={onCancel}
-                            cancelButtonText="重置"
+                            cancelButtonText="清除"
                             v-slots={handlerCompSlots()}
                         />
                     )}
@@ -278,7 +278,7 @@ export default defineComponent({
                             }}
                             onChange={(...args: any) => onEvents('change', name.value, ...args)}
                             onCancel={onCancel}
-                            cancelButtonText="重置"
+                            cancelButtonText="清除"
                             v-slots={handlerCompSlots()}
                         />
                     )}
@@ -333,6 +333,7 @@ export default defineComponent({
                             }}
                             onChange={(...args: any) => onEvents('change', name.value, ...args)}
                             onCancel={onCancel}
+                            cancelButtonText="清除"
                             v-slots={handlerCompSlots()}
                         />
                     )}
@@ -356,7 +357,7 @@ export default defineComponent({
                             }}
                             onChange={(...args: any) => onEvents('change', name.value, ...args)}
                             onCancel={onCancel}
-                            cancelButtonText="重置"
+                            cancelButtonText="清除"
                             v-slots={handlerCompSlots()}
                         />
                     )}
@@ -404,7 +405,7 @@ export default defineComponent({
                                 }}
                                 onChange={(...args: any) => onEvents('change', name.value, ...args)}
                                 onCancel={onCancel}
-                                cancelButtonText="重置"
+                                cancelButtonText="清除"
                                 v-slots={handlerCompSlots()}
                             >
                                 <DatePicker
@@ -431,7 +432,7 @@ export default defineComponent({
                                                     }}
                                                     onChange={(...args: any) => onEvents('change', name.value, ...args)}
                                                     onCancel={onCancel}
-                                                    cancelButtonText="重置"
+                                                    cancelButtonText="清除"
                                                     v-slots={handlerCompSlots()}
                             />;
                     }
@@ -486,7 +487,7 @@ export default defineComponent({
                         }}
                         onChange={(...args: any) => onEvents('change', name.value, ...args)}
                         onCancel={onCancel}
-                        cancelButtonText="重置"
+                        cancelButtonText="清除"
                         v-slots={handlerCompSlots()}
                     >
                         <DatePicker
@@ -538,7 +539,7 @@ export default defineComponent({
                         }}
                         onChange={(...args: any) => onEvents('change', name.value, ...args)}
                         onCancel={onCancel}
-                        cancelButtonText="重置"
+                        cancelButtonText="清除"
                         v-slots={handlerCompSlots()}
                     >
                         <TimePicker v-model={trValue.value.start} {...defaultTime(curAttrs)[0]} />
@@ -588,7 +589,7 @@ export default defineComponent({
                         }}
                         onChange={(...args: any) => onEvents('change', name.value, ...args)}
                         onCancel={onCancel}
-                        cancelButtonText="重置"
+                        cancelButtonText="清除"
                         v-slots={handlerCompSlots()}
                     >
                         <XDatetimePicker v-model={dtrValue.value.start} {...handleDatetimeAttrs(curAttrs)[0]} />
